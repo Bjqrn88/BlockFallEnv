@@ -2,7 +2,6 @@ import random
 import pygame as pg
 import gym
 import sys
-import cv2
 import numpy as np
 from gym import spaces
 
@@ -17,7 +16,6 @@ class BlockFallEnv(gym.Env):
             self.screen = pg.display.set_mode([bfs.SCREEN_WIDTH, bfs.SCREEN_HEIGHT], flags=pg.HIDDEN)
         else:
             self.screen = pg.display.set_mode([bfs.SCREEN_WIDTH, bfs.SCREEN_HEIGHT])
-        self.clock = pg.time.Clock()
 
         self.action_space = spaces.Discrete(3)
         self.observation_space = spaces.Box(low=0, high=255, shape=(100, 150, 1), dtype=np.uint8)
@@ -69,12 +67,10 @@ class BlockFallEnv(gym.Env):
     def draw(self):
         self.screen.fill(bfs.WHITE)
         self.allSprits.draw(self.screen)
-        
 
     def _getObs(self):
-        gray = cv2.cvtColor(pg.surfarray.array3d(self.screen), cv2.COLOR_BGR2GRAY)
-        resize = cv2.resize(gray, (150, 100), interpolation=cv2.INTER_BITS)
-        state = np.reshape(resize, (100, 150, 1))
+        state = [self.block.x, self.block.y, self.block.distFromGoal()]
+        state = np.array(state)
         return state
 
     def _rewardFunc(self):
