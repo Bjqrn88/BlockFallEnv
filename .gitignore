@@ -2,3 +2,4 @@ BlockFall/__pycache__/
 train/
 logs/
 CartPole/
+.DS_Store
