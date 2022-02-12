@@ -18,7 +18,7 @@ class BlockFallEnv(gym.Env):
             self.screen = pg.display.set_mode([bfs.SCREEN_WIDTH, bfs.SCREEN_HEIGHT])
 
         self.action_space = spaces.Discrete(3)
-        self.observation_space = spaces.Box(low=0, high=255, shape=(100, 150, 1), dtype=np.uint8)
+        self.observation_space = spaces.Box(low=0.0, high=float(bfs.SCREEN_WIDTH), shape=(3,), dtype=np.float32)
         self.reset()
 
     def reset(self):
