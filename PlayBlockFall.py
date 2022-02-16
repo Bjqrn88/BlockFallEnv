@@ -3,16 +3,17 @@ from stable_baselines3.common.env_checker import check_env
 from stable_baselines3.common.utils import get_device
 import pygame as pg
 import gym
+from gym_block_fall import envs
 
-from block_fall.envs import BlockFallEnv
-#env = gym.make('block_fall:block_fall-v0')
+env = envs.block_fallEnv()
+#env = gym.make('block_fall-v0')
 
 #print(get_device())
 
 
 #check_env(env, warn=True)
 
-env = BlockFallEnv()
+#env = BlockFallEnv()
 
 obs = env.reset()
 # print(obs.shape)
